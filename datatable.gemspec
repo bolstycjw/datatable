@@ -11,9 +11,9 @@ Gem::Specification.new do |s|
   s.version     = Datatable::VERSION
   s.authors     = ['Broly CJW']
   s.email       = ['brolycjw@gmail.com']
-  s.homepage    = 'TODO'
-  s.summary     = 'TODO: Summary of Datatable.'
-  s.description = 'TODO: Description of Datatable.'
+  s.homepage    = 'https://github.com/brolycjw/datatable'
+  s.summary     = 'Summary of Datatable.'
+  s.description = 'Description of Datatable.'
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*',
