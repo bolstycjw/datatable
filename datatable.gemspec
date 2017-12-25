@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
                 'Rakefile',
                 'README.md']
 
+  s.add_dependency 'kaminari'
   s.add_dependency 'rails', '~> 5.2.0.beta2'
 
   s.add_development_dependency 'sqlite3'

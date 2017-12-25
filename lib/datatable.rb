@@ -5,8 +5,10 @@ module Datatable
   extend ActiveSupport::Concern
 
   autoload :Core
+  autoload :Paginating
 
   included do
     include ::Datatable::Core
+    include ::Datatable::Paginating
   end
 end

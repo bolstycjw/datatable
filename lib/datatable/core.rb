@@ -65,8 +65,7 @@ module Datatable
         scope = default_scope || model_class
         # scope = search(scope)
         # scope = sort(scope)
-        # paginate(scope)
-        scope
+        paginate(scope)
       end
   end
 end
