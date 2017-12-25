@@ -19,7 +19,7 @@ module Datatable
       end
 
       def model_class
-        @model_class ||= name.sub('Datatable', '').singularize.constantize
+        @model_class ||= default_scope.name.constantize
       end
 
       def scope(custom_scope)
@@ -39,33 +39,35 @@ module Datatable
     def as_json(_options = {})
       {
         recordsTotal: model_class.count,
-        recordsFiltered: results.total_count,
+        recordsFiltered: records_filtered,
         data: data
       }
     end
 
-    private
-
-      def data
-        results.decorate.map do |model|
-          [].tap do |row|
-            columns.each do |col|
-              content = @view.instance_exec(model, &col[:block])
-              row << content
-            end
+    def data
+      results.map do |model|
+        [].tap do |row|
+          columns.each do |col|
+            content = @view.instance_exec(model, &col[:block])
+            row << content
           end
         end
       end
+    end
 
-      def results
-        @results ||= fetch_results
-      end
+    def results
+      @results ||= fetch_results
+    end
 
-      def fetch_results
-        scope = default_scope || model_class
-        # scope = search(scope)
-        # scope = sort(scope)
-        paginate(scope)
-      end
+    def records_filtered
+      model_class.count
+    end
+
+    def fetch_results
+      default_scope
+      # scope = search(scope)
+      # scope = sort(scope)
+      # paginate(scope)
+    end
   end
 end

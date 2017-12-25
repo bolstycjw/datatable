@@ -3,6 +3,7 @@
 module Datatable
   module Ordering
     extend ActiveSupport::Concern
+    include Core
 
     class_methods do
       attr_reader :default_order
@@ -11,6 +12,10 @@ module Datatable
         sort_index = columns.find_index { |col| col[:name] == name }
         @default_order = [sort_index, sort_direction]
       end
+    end
+
+    def fetch_results
+      sort(super)
     end
 
     def sort(scope)
@@ -22,14 +27,12 @@ module Datatable
       end
     end
 
-    private
+    def sort_column
+      columns[params[:order]['0'][:column].to_i]
+    end
 
-      def sort_column
-        columns[params[:order]['0'][:column].to_i]
-      end
-
-      def sort_direction
-        params[:order]['0'][:dir] == 'desc' ? 'DESC' : 'ASC'
-      end
+    def sort_direction
+      params[:order]['0'][:dir] == 'desc' ? 'DESC' : 'ASC'
+    end
   end
 end
