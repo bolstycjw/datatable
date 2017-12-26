@@ -2,22 +2,12 @@
 
 require 'test_helper'
 
-class FooDecorator
-  def initialize(foo)
-    @foo = foo
-  end
-
-  def name
-    "decorated #{@foo.name}"
-  end
-end
-
 class CoreDatatable
   include Datatable::Core
 
   scope { Foo.all }
 
-  decorate { |model| FooDecorator.new(model) }
+  decorate
 
   column :name
 end
@@ -40,7 +30,7 @@ class CoreTest < ActiveSupport::TestCase
   end
 
   test '.decorator returns decorator' do
-    assert_kind_of Proc, CoreDatatable.decorator
+    assert_kind_of Symbol, CoreDatatable.decorator
   end
 
   test '#as_json returns a results hash' do
