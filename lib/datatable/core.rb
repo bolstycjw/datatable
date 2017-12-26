@@ -18,8 +18,8 @@ module Datatable
         }
       end
 
-      def decorate
-        @decorator = yield
+      def decorate(&block)
+        @decorator = block
       end
 
       def model_class
@@ -50,7 +50,7 @@ module Datatable
 
     def data
       results.map do |model|
-        model = decorator.new(model) if decorator
+        model = decorator.call(model) if decorator
         [].tap do |row|
           columns.each do |col|
             content = @view.instance_exec(model, &col[:block])

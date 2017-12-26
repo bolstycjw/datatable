@@ -17,7 +17,7 @@ class CoreDatatable
 
   scope { Foo.all }
 
-  decorate { FooDecorator }
+  decorate { |model| FooDecorator.new(model) }
 
   column :name
 end
@@ -40,7 +40,7 @@ class CoreTest < ActiveSupport::TestCase
   end
 
   test '.decorator returns decorator' do
-    assert CoreDatatable.decorator == FooDecorator
+    assert_kind_of Proc, CoreDatatable.decorator
   end
 
   test '#as_json returns a results hash' do
