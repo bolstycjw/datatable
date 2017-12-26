@@ -19,7 +19,11 @@ module Datatable
       end
 
       def decorate(&block)
-        @decorator = block
+        if block_given?
+          @decorator = block
+        else
+          @decorator = :decorate
+        end
       end
 
       def model_class
@@ -50,7 +54,7 @@ module Datatable
 
     def data
       results.map do |model|
-        model = decorator.call(model) if decorator
+        model = decorate(model) if decorator
         [].tap do |row|
           columns.each do |col|
             content = @view.instance_exec(model, &col[:block])
@@ -71,5 +75,11 @@ module Datatable
     def fetch_results
       default_scope
     end
+
+    private
+
+      def decorate(model)
+        decorator.respond_to?(:call) ? decorator.call(model) : model.decorate
+      end
   end
 end
