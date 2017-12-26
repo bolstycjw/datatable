@@ -5,7 +5,7 @@ require 'test_helper'
 class SearchingDatatable
   include Datatable::Searching
 
-  scope Foo.all
+  scope { Foo.all }
 
   column :name
 end

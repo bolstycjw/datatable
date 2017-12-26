@@ -5,7 +5,7 @@ require 'test_helper'
 class OrderingDatatable
   include Datatable::Ordering
 
-  scope Foo.all
+  scope { Foo.all }
 
   column :name
 

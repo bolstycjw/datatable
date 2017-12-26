@@ -5,7 +5,7 @@ module Datatable
     extend ActiveSupport::Concern
 
     class_methods do
-      attr_reader :columns, :default_scope
+      attr_reader :columns, :decorator, :default_scope
 
       def column(column_name, order: true, search: false, &block)
         block ||= ->(model) { model.send(column_name) }
@@ -18,17 +18,21 @@ module Datatable
         }
       end
 
+      def decorate
+        @decorator = yield
+      end
+
       def model_class
         @model_class ||= default_scope.name.constantize
       end
 
-      def scope(custom_scope)
-        @default_scope = custom_scope
+      def scope
+        @default_scope = yield
       end
     end
 
     included do
-      delegate :columns, :default_scope, :model_class, to: :class
+      delegate :columns, :decorator, :default_scope, :model_class, to: :class
       delegate :params, to: :@view
     end
 
@@ -46,6 +50,7 @@ module Datatable
 
     def data
       results.map do |model|
+        model = decorator.new(model) if decorator
         [].tap do |row|
           columns.each do |col|
             content = @view.instance_exec(model, &col[:block])
@@ -65,9 +70,6 @@ module Datatable
 
     def fetch_results
       default_scope
-      # scope = search(scope)
-      # scope = sort(scope)
-      # paginate(scope)
     end
   end
 end

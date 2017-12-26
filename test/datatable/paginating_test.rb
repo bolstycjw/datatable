@@ -5,7 +5,7 @@ require 'test_helper'
 class PaginatingDatatable
   include Datatable::Paginating
 
-  scope Foo.all
+  scope { Foo.all }
 
   column :name
 end

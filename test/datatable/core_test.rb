@@ -2,18 +2,29 @@
 
 require 'test_helper'
 
+class FooDecorator
+  def initialize(foo)
+    @foo = foo
+  end
+
+  def name
+    "decorated #{@foo.name}"
+  end
+end
+
 class CoreDatatable
   include Datatable::Core
 
-  scope Foo.where(name: 'foo')
+  scope { Foo.all }
+
+  decorate { FooDecorator }
 
   column :name
 end
 
 class CoreTest < ActiveSupport::TestCase
   setup do
-    Foo.create!(name: 'foo')
-    Foo.create!(name: 'bar')
+    create_list(:foo, 10)
   end
 
   test '.columns returns an array' do
@@ -25,11 +36,17 @@ class CoreTest < ActiveSupport::TestCase
   end
 
   test '.default_scope returns filtered scope' do
-    assert CoreDatatable.default_scope == Foo.where(name: 'foo')
+    assert CoreDatatable.default_scope == Foo.all
+  end
+
+  test '.decorator returns decorator' do
+    assert CoreDatatable.decorator == FooDecorator
   end
 
   test '#as_json returns a results hash' do
-    assert_equal({ recordsTotal: 2, recordsFiltered: 2, data: [['foo']] },
-                 CoreDatatable.new(nil).as_json)
+    datatable = CoreDatatable.new(nil)
+    data = datatable.results.map { |model| ["decorated #{model.name}"] }
+    assert_equal({ recordsTotal: 10, recordsFiltered: 10, data: data },
+                 datatable.as_json)
   end
 end
