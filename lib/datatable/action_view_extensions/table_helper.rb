@@ -9,7 +9,7 @@ module Datatable
           class: 'table table-bordered w-100',
           data: {
             columns: datatable.columns.map do |col|
-              { data: col[:name], **col[:options] }.to_json
+              { data: col[:name], **col[:options] }
             end,
             url: url,
             order: datatable.default_order
