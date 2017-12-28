@@ -55,10 +55,10 @@ module Datatable
     def data
       results.map do |model|
         model = decorate(model) if decorator
-        [].tap do |row|
+        {}.tap do |obj|
           columns.each do |col|
             content = @view.instance_exec(model, &col[:block])
-            row << content
+            obj[col[:name]] = content
           end
         end
       end

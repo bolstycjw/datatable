@@ -7,8 +7,11 @@ module Datatable
         tag.table(
           role: 'datatable',
           class: 'table table-bordered w-100',
-          data: { url: url,
-                  order: datatable.default_order }
+          data: {
+            columns: datatable.columns.map { |col| { data: col[:name] } }.to_json,
+            url: url,
+            order: datatable.default_order
+          }
         ) do
           thead_tag(*datatable.columns) do |column|
             concat tag.th(column[:name].to_s.humanize)
