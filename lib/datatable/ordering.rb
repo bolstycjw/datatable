@@ -19,12 +19,7 @@ module Datatable
     end
 
     def sort(scope)
-      return scope unless (order = sort_column[:order])
-      if order.respond_to?(:call)
-        order.call(scope)
-      else
-        scope.order("#{sort_column[:name]} #{sort_direction}")
-      end
+      scope.order("#{sort_column[:name]} #{sort_direction}")
     end
 
     def sort_column
