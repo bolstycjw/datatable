@@ -19,12 +19,14 @@ module Datatable
       results.total_count
     end
 
-    def page
-      params[:start].to_i / per_page + 1
-    end
+    private
 
-    def per_page
-      params[:length].to_i.positive? ? params[:length].to_i : 10
-    end
+      def page
+        params[:start].to_i / per_page + 1
+      end
+
+      def per_page
+        params[:length].to_i.positive? ? params[:length].to_i : 10
+      end
   end
 end
