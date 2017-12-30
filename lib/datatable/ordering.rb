@@ -19,15 +19,17 @@ module Datatable
     end
 
     def sort(scope)
-      scope.order("#{sort_column[:name]} #{sort_direction}")
+      scope.order("#{model_table_name}.#{sort_column[:name]} #{sort_direction}")
     end
 
-    def sort_column
-      columns[params[:order]['0'][:column].to_i]
-    end
+    private
 
-    def sort_direction
-      params[:order]['0'][:dir] == 'desc' ? 'DESC' : 'ASC'
-    end
+      def sort_column
+        columns[params[:order]['0'][:column].to_i]
+      end
+
+      def sort_direction
+        params[:order]['0'][:dir] == 'desc' ? 'DESC' : 'ASC'
+      end
   end
 end

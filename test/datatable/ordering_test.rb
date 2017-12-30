@@ -23,7 +23,7 @@ class OrderingTest < ActiveSupport::TestCase
   end
 
   test '#sort_column returns sort column' do
-    assert_equal :name, @datatable.sort_column[:name]
+    assert_equal :name, @datatable.send(:sort_column)[:name]
   end
 
   test '#fetch_results returns sorted results' do

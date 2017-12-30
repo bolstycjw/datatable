@@ -29,13 +29,22 @@ module Datatable
         @model_class ||= default_scope.name.constantize
       end
 
+      def model_table_name
+        model_class.table_name
+      end
+
       def scope
         @default_scope = yield
       end
     end
 
     included do
-      delegate :columns, :decorator, :default_scope, :model_class, to: :class
+      delegate(:columns,
+               :decorator,
+               :default_scope,
+               :model_class,
+               :model_table_name,
+               to: :class)
       delegate :params, to: :@view
     end
 
