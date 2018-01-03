@@ -7,11 +7,12 @@ module Datatable
     class_methods do
       attr_reader :columns, :decorator, :default_scope
 
-      def column(column_name, **options, &block)
+      def column(column_name, order: nil, **options, &block)
         block ||= ->(model) { model.send(column_name) }
         @columns ||= []
         @columns << {
           name: column_name,
+          order: order,
           options: options,
           block: block
         }

@@ -15,8 +15,7 @@ module Datatable
       columns.select(&method(:searchable?)).each do |col|
         search_string << "#{model_class.table_name}.#{col[:name]} LIKE :search"
       end
-      results = scope.where(search_string.join(' or '),
-                          search: "%#{term}%")
+      results = scope.where(search_string.join(' or '), search: "%#{term}%")
       methods
         .select { |method| method.to_s.starts_with?('search_by') }
         .each { |method| results = results.or(send(method, scope, term)) }

@@ -19,7 +19,8 @@ module Datatable
     end
 
     def sort(scope)
-      scope.order("#{model_table_name}.#{sort_column[:name]} #{sort_direction}")
+      query = sort_column[:order] || "#{model_table_name}.#{sort_column[:name]}"
+      scope.order("#{query} #{sort_direction}")
     end
 
     private
