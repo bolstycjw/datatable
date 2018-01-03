@@ -5,6 +5,11 @@ Heavily inspired by [bogdan/datagrid](https://github.com/bogdan/datagrid/tree/ma
 
 ## Usage
 
+run generator to copy assets
+```console
+$ rails generate datatable:install
+```
+
 create a datatable:
 ``` ruby
 # app/datatables/users_datatable.rb
