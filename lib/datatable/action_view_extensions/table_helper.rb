@@ -16,7 +16,7 @@ module Datatable
           }
         ) do
           thead_tag(*datatable.columns) do |column|
-            concat tag.th(column[:name].to_s.humanize)
+            concat tag.th(column[:header] || column[:name].to_s.humanize)
           end
         end
       end

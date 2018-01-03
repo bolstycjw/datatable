@@ -7,9 +7,15 @@ module Datatable
     class_methods do
       attr_reader :columns, :decorator, :default_scope
 
-      def column(name, order: nil, search: nil, searchable: true, **options)
+      def column(name,
+                 header: nil,
+                 order: nil,
+                 search: nil,
+                 searchable: true,
+                 **options)
         (@columns ||= []) << {
           name: name,
+          header: header,
           order: order,
           search: search,
           searchable: searchable,
