@@ -89,7 +89,9 @@ $ gem install datatable
 ```
 
 ## Contributing
-Contribution directions go here.
+[Pull requests](https://github.com/brolycjw/datatable) are very welcome! Please include tests for every patch, and create a topic branch for every separate change you make.
+
+Report issues or feature requests to [GitHub Issues](https://github.com/brolycjw/datatable/issues).
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
