@@ -8,6 +8,7 @@ Heavily inspired by [bogdan/datagrid](https://github.com/bogdan/datagrid/tree/ma
 create a datatable:
 ``` ruby
 # app/datatables/users_datatable.rb
+
 class UsersDatatable
   include Datatable
 
@@ -29,6 +30,7 @@ end
 add json response to controller:
 ``` ruby
 # app/controllers/users_controller.rb
+
 class UsersController
   # GET /users
   # GET /users.json
@@ -45,6 +47,7 @@ end
 render datatable with datatable view helper:
 ``` ruby
 # app/views/users/index.html.erb
+
 <%= datatable_for(UsersDatatable, url: users_path(format: :json)) %>
 ```
 
