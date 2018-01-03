@@ -7,14 +7,14 @@ module Datatable
     class_methods do
       attr_reader :columns, :decorator, :default_scope
 
-      def column(column_name, order: nil, **options, &block)
-        block ||= ->(model) { model.send(column_name) }
-        @columns ||= []
-        @columns << {
-          name: column_name,
+      def column(name, order: nil, search: nil, searchable: true, **options)
+        (@columns ||= []) << {
+          name: name,
           order: order,
+          search: search,
+          searchable: searchable,
           options: options,
-          block: block
+          block: block_given? ? Proc.new : ->(model) { model.send(name) }
         }
       end
 

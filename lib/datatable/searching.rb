@@ -13,19 +13,22 @@ module Datatable
       term = params[:search][:value]
       search_string = []
       columns.select(&method(:searchable?)).each do |col|
-        search_string << "#{model_class.table_name}.#{col[:name]} LIKE :search"
+        query = col[:search] || "#{model_class.table_name}.#{col[:name]}"
+        search_string << "#{query} LIKE :search"
       end
-      results = scope.where(search_string.join(' or '), search: "%#{term}%")
-      methods
-        .select { |method| method.to_s.starts_with?('search_by') }
-        .each { |method| results = results.or(send(method, scope, term)) }
-      results
+      scope.where(search_string.join(' or '), search: "%#{term}%")
     end
 
     private
 
       def searchable?(column)
-        model_class.column_for_attribute(column[:name]).type == :string
+        column[:searchable] && (column[:search] || text_column?(column[:name]))
+      end
+
+      def text_column?(column_name)
+        %i[string text].include?(
+          model_class.column_for_attribute(column_name).type
+        )
       end
   end
 end
