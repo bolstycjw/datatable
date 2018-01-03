@@ -22,13 +22,16 @@ class UsersDatatable
   end
 
   column(:name)
+  # with custom order and search
   column(:group, order: 'groups.name', search: 'groups.name') do |user|
     user.name
   end
+  # with custom header
   column(:active, header: "Activated") do |user|
     !user.disabled
   end
   
+  # default column to order by
   order_by :name, :desc
 
 end
