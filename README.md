@@ -28,6 +28,8 @@ class UsersDatatable
   column(:active, header: "Activated") do |user|
     !user.disabled
   end
+  
+  order_by :name, :desc
 
 end
 ```
