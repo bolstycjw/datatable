@@ -3,7 +3,7 @@
 module Datatable
   module ActionViewExtensions
     module TableHelper
-      def datatable_for(datatable:, url:, **options)
+      def datatable_for(datatable, url:, **options)
         tag.table(
           role: 'datatable',
           data: {

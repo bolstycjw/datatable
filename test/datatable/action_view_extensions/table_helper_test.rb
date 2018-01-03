@@ -16,7 +16,7 @@ class TableHelperTest < ActionView::TestCase
   include Datatable::ActionViewExtensions::TableHelper
 
   test 'datatable_for adds default role to table' do
-    concat datatable_for(datatable: FooDatatable, url: '/foos')
+    concat datatable_for(FooDatatable, url: '/foos')
     assert_select 'table[role=datatable]'
   end
 end
