@@ -3,17 +3,17 @@
 module Datatable
   module ActionViewExtensions
     module TableHelper
-      def datatable_for(datatable:, url:)
+      def datatable_for(datatable:, url:, **options)
         tag.table(
           role: 'datatable',
-          class: 'table table-bordered w-100',
           data: {
             columns: datatable.columns.map do |col|
               { data: col[:name], **col[:options] }
             end,
             url: url,
             order: datatable.default_order
-          }
+          },
+          **options
         ) do
           thead_tag(*datatable.columns) do |column|
             concat tag.th(column[:header] || column[:name].to_s.humanize)
