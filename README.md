@@ -12,6 +12,7 @@ $ yarn add datatables.net
 
 add to asset pipeline
 ``` ruby
+# app/assets/javascripts/application.js
 //= require jquery/dist/jquery
 ...
 //= require datatables.net/js/jquery.dataTables
