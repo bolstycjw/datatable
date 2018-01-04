@@ -5,6 +5,18 @@ Heavily inspired by [bogdan/datagrid](https://github.com/bogdan/datagrid/tree/ma
 
 ## Usage
 
+import datatables assets
+```console
+$ yarn add datatables.net
+```
+
+add to asset pipeline
+``` ruby
+//= require jquery/dist/jquery
+...
+//= require datatables.net/js/jquery.dataTables
+```
+
 run generator to copy assets
 ```console
 $ rails generate datatable:install
