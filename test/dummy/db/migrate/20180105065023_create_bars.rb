@@ -1,4 +1,4 @@
-class CreateBars < ActiveRecord::Migration[5.2]
+class CreateBars < ActiveRecord::Migration[5.1]
   def change
     create_table :bars do |t|
       t.references :foo, foreign_key: true

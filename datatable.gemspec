@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
                 'README.md']
 
   s.add_dependency 'kaminari'
-  s.add_dependency 'rails'
+  s.add_dependency 'rails', '>= 5.0'
 
   s.add_development_dependency 'draper'
   s.add_development_dependency 'factory_bot_rails'

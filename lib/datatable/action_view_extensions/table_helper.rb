@@ -5,7 +5,7 @@ module Datatable
     module TableHelper
       def datatable_for(datatable, url:, **options)
         tag.table(
-          role: 'datatable',
+          id: 'datatable',
           data: {
             columns: datatable.columns.map do |col|
               { data: col[:name], **col[:options] }
