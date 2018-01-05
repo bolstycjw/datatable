@@ -1,8 +1,7 @@
 $(function () {
-  $("table[role='datatable']").DataTable({
+  $('#datatable').DataTable({
     processing: true,
     serverSide: true,
-    responsive: true,
     ajax: { url: $(this).data('url') }
   })
 })
