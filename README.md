@@ -39,7 +39,7 @@ class UsersDatatable
     User.includes(:group).references(:group)
   end
   
-  # Optional: decorates the collection if you are using Draper::Decorator
+  # optional: decorates the collection with draper
   decorate
 
   column(:name)
