@@ -79,6 +79,9 @@ render datatable with datatable view helper:
 ``` ruby
 # app/views/users/index.html.erb
 
+<%= datatable_for(UsersDatatable) %>
+
+# or with custom url
 <%= datatable_for(UsersDatatable, url: users_path(format: :json)) %>
 ```
 
