@@ -76,12 +76,12 @@ end
 ```
 
 render datatable with datatable view helper:
-``` ruby
-# app/views/users/index.html.erb
+``` erb
+<%# app/views/users/index.html.erb %>
 
 <%= datatable_for(UsersDatatable) %>
 
-# or with custom url
+<%# or with custom url %>
 <%= datatable_for(UsersDatatable, url: users_path(format: :json)) %>
 ```
 
@@ -117,7 +117,7 @@ You may customize the datatable's client-side features by modifying the included
 
 Example for Buttons extension:
 
-```
+``` js
 # app/assets/javascripts/datatable.js
 
 $(function () {
