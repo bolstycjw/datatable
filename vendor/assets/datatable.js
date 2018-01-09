@@ -1,7 +1,9 @@
 $(function () {
-  $('#datatable').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: { url: $(this).data('url') }
-  })
+  $('#datatable').each(function () {
+    $(this).DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: { url: $(this).data('url') }
+    })
+  }
 })

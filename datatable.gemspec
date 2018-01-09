@@ -21,10 +21,13 @@ Gem::Specification.new do |s|
                 'Rakefile',
                 'README.md']
 
-  s.add_dependency 'kaminari'
+  s.add_dependency 'kaminari', '>= 1.0'
   s.add_dependency 'rails', '>= 5.0'
 
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'chromedriver-helper'
   s.add_development_dependency 'draper'
   s.add_development_dependency 'factory_bot_rails'
+  s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'sqlite3'
 end

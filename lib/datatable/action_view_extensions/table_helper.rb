@@ -3,14 +3,14 @@
 module Datatable
   module ActionViewExtensions
     module TableHelper
-      def datatable_for(datatable, url:, **options)
+      def datatable_for(datatable, url: nil, **options)
         tag.table(
           id: 'datatable',
           data: {
             columns: datatable.columns.map do |col|
               { data: col[:name], **col[:options] }
             end,
-            url: url,
+            url: url || polymorphic_path(datatable.model_class, format: :json),
             order: datatable.default_order
           },
           **options
