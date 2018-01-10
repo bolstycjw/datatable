@@ -11,7 +11,7 @@ module Datatable
               { data: col[:name], **col[:options] }
             end,
             url: url || polymorphic_path(
-              datatable.new(ActionController::Base.helpers).model_class,
+              datatable.new(self).model_class,
               format: :json
             ),
             order: datatable.default_order
