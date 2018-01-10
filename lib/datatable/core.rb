@@ -24,24 +24,16 @@ module Datatable
         }
       end
 
-      def decorate(&block)
+      def decorate
         if block_given?
-          @decorator = block
+          @decorator = Proc.new
         else
           @decorator = :decorate
         end
       end
 
-      def model_class
-        @model_class ||= default_scope.name.constantize
-      end
-
-      def model_table_name
-        model_class.table_name
-      end
-
       def scope
-        @default_scope = yield
+        @default_scope = Proc.new
       end
     end
 
@@ -49,8 +41,6 @@ module Datatable
       delegate(:columns,
                :decorator,
                :default_scope,
-               :model_class,
-               :model_table_name,
                to: :class)
       delegate :params, to: :@view
     end
@@ -88,7 +78,15 @@ module Datatable
     end
 
     def fetch_results
-      default_scope
+      instance_eval(&default_scope)
+    end
+
+    def model_class
+      @model_class ||= instance_eval(&default_scope).name.constantize
+    end
+
+    def model_table_name
+      model_class.table_name
     end
 
     private

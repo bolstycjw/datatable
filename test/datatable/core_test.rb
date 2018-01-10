@@ -22,11 +22,11 @@ class CoreTest < ActiveSupport::TestCase
   end
 
   test '.model_class returns Foo class' do
-    assert CoreDatatable.model_class == Foo
+    assert CoreDatatable.new(nil).model_class == Foo
   end
 
   test '.default_scope returns filtered scope' do
-    assert CoreDatatable.default_scope == Foo.all
+    assert CoreDatatable.default_scope.call == Foo.all
   end
 
   test '.decorator returns decorator' do

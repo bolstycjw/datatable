@@ -10,7 +10,10 @@ module Datatable
             columns: datatable.columns.map do |col|
               { data: col[:name], **col[:options] }
             end,
-            url: url || polymorphic_path(datatable.model_class, format: :json),
+            url: url || polymorphic_path(
+              datatable.new(ActionController::Base.helpers).model_class,
+              format: :json
+            ),
             order: datatable.default_order
           },
           **options
