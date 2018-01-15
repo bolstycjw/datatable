@@ -10,6 +10,12 @@ Heavily inspired by [bogdan/datagrid](https://github.com/bogdan/datagrid/tree/ma
 
 ## Usage
 
+add to gemfile
+``` ruby
+# Gemfile
+$ gem 'datatable', github: 'brolycjw/datatable'
+```
+
 import datatables assets
 ```console
 $ yarn add datatables.net
