@@ -4,19 +4,24 @@ module Datatable
   module ActionViewExtensions
     module TableHelper
       def datatable_for(datatable, url: nil, **options)
-        tag.table(
-          id: 'datatable',
-          data: {
-            columns: datatable.columns.map do |col|
-              { data: col[:name], **col[:options] }
-            end,
-            url: url || polymorphic_path(
-              datatable.new(self).model_class,
-              format: :json
-            ),
-            order: datatable.default_order
-          },
+        html_options = options.delete(:html_options) || {}
+        columns_options = datatable.columns.map do |col|
+          { data: col[:name], **col[:options] }
+        end
+        url = url || polymorphic_path(datatable.new(self).model_class,
+                                      format: :json)
+        datatable_options = {
+          processing: true,
+          'server-side': true,
+          columns: columns_options,
+          url: url,
+          order: datatable.default_order,
           **options
+        }
+        tag.table(
+          role: 'datatable',
+          data: datatable_options,
+          **html_options
         ) do
           thead_tag(*datatable.columns) do |column|
             concat tag.th(column[:header] || column[:name].to_s.humanize)

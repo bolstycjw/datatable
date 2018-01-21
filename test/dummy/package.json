@@ -1,8 +1,6 @@
 {
-  "name": "dummy",
-  "private": true,
   "dependencies": {
-    "datatables.net": "^1.10.16",
-    "jquery": "^3.2.1"
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.0"
   }
 }

@@ -11,5 +11,5 @@
 // about supported directives.
 //
 //= require jquery
-//= require datatables.net/js/jquery.dataTables
+//= require datatable-bs4
 //= require_tree .

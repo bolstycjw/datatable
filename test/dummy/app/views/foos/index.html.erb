@@ -1,2 +1,6 @@
 <h1>Foos#index</h1>
+<%= form_tag '', method: :get do %>
+  <%= text_field_tag :name %>
+  <%= submit_tag 'Filter' %>
+<% end %>
 <%= datatable_for(FoosDatatable) %>
