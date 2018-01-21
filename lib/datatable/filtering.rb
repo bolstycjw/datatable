@@ -21,7 +21,7 @@ module Datatable
     end
 
     def fetch_results
-      filter(super)
+      filters ? filter(super) : super
     end
 
     def filter(scope)
