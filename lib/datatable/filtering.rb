@@ -26,7 +26,10 @@ module Datatable
 
     def filter(scope)
       filters.each do |filter|
-        terms = filter[:names].map { |name| params[name] }.compact
+        terms = filter[:names]
+                  .map { |name| params[name] }
+                  .compact
+                  .map { |param| URI.decode(param.to_s) }
         scope = filter[:block].call(scope, *terms) unless terms.empty?
       end
       scope
