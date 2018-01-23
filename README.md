@@ -47,6 +47,11 @@ class UsersDatatable
   
   # optional: decorates the collection with draper
   decorate
+  
+  # filter by name and created_at between start_date and end_date
+  filter :name, start_date, end_date do |scope, name, start_date, end_date|
+    scope.where('name LIKE ?', "%#{name}%").where(created_at: start_date..end_date)
+  end
 
   column(:name)
   # with custom order and search
@@ -99,6 +104,32 @@ Default scope of objects to filter and display.
 scope do
   User.includes(:group)
 end
+```
+
+### Filter
+
+Additional filtering functionality for filtering beyond the basic fuzzy search
+
+``` ruby
+filter(:name) do |scope, name|
+  scope.where('name LIKE ?', "%#{name}%")
+end
+
+filter(:start_date, :end_date) do |scope, start_date, end_date|
+  scope.where(date: start_date..end_date)
+end
+```
+
+``` erb
+<%# app/views/users/index.html.erb %>
+
+<%= form_tag(users_path, method: :get) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.date_field :start_date %>
+  <%= f.date_field :end_date %>
+<% end %>
+
+<%= datatable_for(UsersDatatable) %>
 ```
 
 ## Installation
