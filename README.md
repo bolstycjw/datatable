@@ -16,22 +16,14 @@ add to gemfile
 $ gem 'datatable', github: 'brolycjw/datatable'
 ```
 
-import datatables assets
-```console
-$ yarn add datatables.net
-```
-
 add to asset pipeline
 ``` ruby
 # app/assets/javascripts/application.js
-//= require jquery/dist/jquery
+//= require jquery
 ...
-//= require datatables.net/js/jquery.dataTables
-```
-
-run generator to copy assets
-```console
-$ rails generate datatable:install
+//= require datatable
+# or for bootstrap 4
+//= require datatable-bs4
 ```
 
 create a datatable:
@@ -127,6 +119,7 @@ end
   <%= f.text_field :name %>
   <%= f.date_field :start_date %>
   <%= f.date_field :end_date %>
+  <%= f.submit %>
 <% end %>
 
 <%= datatable_for(UsersDatatable) %>
