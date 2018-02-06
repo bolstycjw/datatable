@@ -10,6 +10,7 @@ class FoosDatatable
   end
 
   column :name
+  column :created_at
 
   order_by :name, 'desc'
 end
