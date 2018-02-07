@@ -12,7 +12,7 @@ class FoosDatatable
   column :name
   column :created_at
 
-  action 'Mark for GIRO', :mark_for_giro_foos_path
+  action 'Rename to Bar', :namechange_foos_path, 'Bar'
 
   order_by :name, 'desc'
 end

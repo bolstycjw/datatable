@@ -10,7 +10,12 @@ module Datatable
         end
         datatable_instance = datatable.new(self)
         actions = datatable.actions&.map do |action|
-          { name: action[:name], path: send(action[:path]) }
+          byebug
+          p send(action[:path], *action[:path_args], **action[:path_params])
+          {
+            name: action[:name],
+            path: send(action[:path], *action[:path_args], **action[:path_params])
+          }
         end
         url = url || polymorphic_path(datatable_instance.model_class,
                                       format: :json)

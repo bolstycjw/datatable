@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datatable (0.8.0)
+    datatable (0.9.0)
       kaminari (>= 1.0)
       rails (>= 5.0)
 

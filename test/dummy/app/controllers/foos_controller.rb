@@ -6,7 +6,7 @@ class FoosController < ApplicationController
     end
   end
 
-  def state
-    Foo.where(id: params[:ids]).update(name: params[:state])
+  def namechange
+    Foo.where(id: params[:ids]).update(name: params[:name])
   end
 end
