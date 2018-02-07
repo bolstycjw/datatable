@@ -10,10 +10,10 @@ module Datatable
         end
         datatable_instance = datatable.new(self)
         actions = datatable.actions&.map do |action|
-          p send(action[:path], *action[:path_args], **action[:path_params])
           {
             name: action[:name],
-            path: send(action[:path], *action[:path_args], **action[:path_params])
+            path: send(action[:path], *action[:path_args]),
+            class: action[:class]
           }
         end
         url = url || polymorphic_path(datatable_instance.model_class,

@@ -25,8 +25,15 @@ initSelectable = function (el, table) {
   new $.fn.dataTable.Buttons(table, {
     name: 'actions',
     buttons: $.map(el.data('actions'), function (action) {
+      console.log(action)
       return {
         text: action.name,
+        init: function(api, node, config) {
+          if (action.class) {
+            $(node).removeClass()
+            $(node).addClass(action.class)
+          }
+        },
         action: function (e, dt, node, config) {
           var ids = $.map(el.data('selected'), function (rowId) {
             return rowId.replace('#row-', '')

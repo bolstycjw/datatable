@@ -7,12 +7,12 @@ module Datatable
     class_methods do
       attr_reader :actions
 
-      def action(name, path, *path_args, **path_params)
+      def action(name, path, *path_args, **options)
         (@actions ||= []) << {
           name: name,
           path: path,
           path_args: path_args,
-          path_params: path_params
+          **options
         }
       end
     end
