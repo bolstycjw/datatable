@@ -10,7 +10,6 @@ module Datatable
         end
         datatable_instance = datatable.new(self)
         actions = datatable.actions&.map do |action|
-          byebug
           p send(action[:path], *action[:path_args], **action[:path_params])
           {
             name: action[:name],
