@@ -10,6 +10,6 @@ class DatatableIntegrationTest < ActionDispatch::IntegrationTest
 
   test 'visiting the index' do
     visit '/foos'
-    assert_selector 'table tr td', count: 2
+    assert_selector 'table tr td', count: 4
   end
 end

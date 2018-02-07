@@ -61,7 +61,7 @@ module Datatable
       results.map do |model|
         model = decorate(model) if decorator
         {}.tap do |obj|
-          obj['DT_RowId'] = "row_#{model.id}"
+          obj['DT_RowId'] = "row-#{model.id}"
           columns.each do |col|
             content = @view.instance_exec(model, &col[:block])
             obj[col[:name]] = content

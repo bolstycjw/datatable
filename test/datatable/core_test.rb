@@ -36,7 +36,7 @@ class CoreTest < ActiveSupport::TestCase
   test '#as_json returns a results hash' do
     datatable = CoreDatatable.new(nil)
     data = datatable.results.map do |model|
-      { name: "decorated #{model.name}" }
+      { 'DT_RowId' => "row-#{model.id}", name: "decorated #{model.name}" }
     end
     assert_equal({ recordsTotal: 10, recordsFiltered: 10, data: data },
                  datatable.as_json)

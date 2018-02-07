@@ -1,2 +1,3 @@
 <h1>Foos#index</h1>
-<%= datatable_for(FoosDatatable, select: { style: 'multi' }) %>
+<%= datatable_for(FoosDatatable, select: { style: 'multi' },
+                  html_options: { class: 'table table-bordered w-100' }) %>

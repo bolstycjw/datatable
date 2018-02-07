@@ -1,25 +1,62 @@
 initSelectable = function (el, table) {
   function initSelectInfo() {
-    var tableWrapper = el.closest('.dataTables_wrapper')
-    tableWrapper
-      .find('.dataTables_info')
-      .append(
-        '<span class="select-info"><span class="select-item"></span></span>'
-      )
+    $('.dataTables_info', table.table().container())
+      .append('<span class="select-info"><span class="select-item"></span></span>')
   }
 
   function updateSelectInfo() {
     var rowIds = el.data('selected') || []
-    var tableWrapper = el.closest('.dataTables_wrapper')
-    var selectInfo = tableWrapper.find('.select-info .select-item:first-child')
+    var selectInfo = $('.select-info .select-item:first-child', table.table().container())
     selectInfo.html(rowIds.length + ' rows selected')
   }
 
+  $('.row:eq(0)', table.table().container()).after(
+    '<div class="row">' +
+    '<div class="col-sm-12 col-md-6"></div>' +
+    '<div class="col-sm-12 col-md-6 text-right"></div>' +
+    '</div>'
+  )
+
+  new $.fn.dataTable.Buttons(table, {
+    name: 'utility',
+    buttons: ['selectAll', 'selectNone']
+  })
+
+  new $.fn.dataTable.Buttons(table, {
+    name: 'actions',
+    buttons: $.map(el.data('actions'), function (action) {
+      return {
+        text: action.name,
+        action: function (e, dt, node, config) {
+          var ids = $.map(el.data('selected'), function (rowId) {
+            return rowId.replace('#row-', '')
+          })
+          $.ajax(action.path, {
+            headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+            method: 'POST',
+            data: {
+              ids: ids
+            }
+          }).done(function (data) {
+            dt.ajax.reload()
+          })
+        }
+      }
+    })
+  })
+
+  table.buttons('utility', null).containers().appendTo(
+    $('.row:eq(1) .col-md-6:eq(0)', table.table().container())
+  )
+  table.buttons('actions', null).containers().appendTo(
+    $('.row:eq(1) .col-md-6:eq(1)', table.table().container())
+  )
+
   table.on('draw', function () {
-    initSelectInfo(el)
+    initSelectInfo()
     var rowIds = el.data('selected') || []
     table.rows(rowIds).select()
-    updateSelectInfo(el)
+    updateSelectInfo()
   })
 
   table.on('select deselect', function (e, dt, type, indexes) {
@@ -34,6 +71,6 @@ initSelectable = function (el, table) {
       }
     })
     el.data('selected', rowIds)
-    updateSelectInfo(el)
+    updateSelectInfo()
   })
 }

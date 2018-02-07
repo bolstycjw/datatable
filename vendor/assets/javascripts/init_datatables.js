@@ -2,6 +2,7 @@ $(function () {
   $('table[role="datatable"]').each(function () {
     var el = $(this)
     var table = el.DataTable({
+      buttons: ['selectAll'],
       ajax: {
         url: el.data('url'),
         data: function (d) {

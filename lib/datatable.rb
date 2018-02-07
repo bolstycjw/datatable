@@ -8,6 +8,7 @@ module Datatable
   extend ActiveSupport::Concern
 
   autoload :Core
+  autoload :Actions
   autoload :Filtering
   autoload :Searching
   autoload :Ordering
@@ -16,6 +17,7 @@ module Datatable
 
   included do
     include ::Datatable::Core
+    include ::Datatable::Actions
     include ::Datatable::Filtering
     include ::Datatable::Searching
     include ::Datatable::Ordering

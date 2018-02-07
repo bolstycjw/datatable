@@ -8,9 +8,14 @@ module Datatable
         columns_options = datatable.columns.map do |col|
           { data: col[:name], **col[:options] }
         end
-        url = url || polymorphic_path(datatable.new(self).model_class,
+        datatable_instance = datatable.new(self)
+        actions = datatable.actions&.map do |action|
+          { name: action[:name], path: send(action[:path]) }
+        end
+        url = url || polymorphic_path(datatable_instance.model_class,
                                       format: :json)
         datatable_options = {
+          actions: actions,
           processing: true,
           'server-side': true,
           columns: columns_options,
