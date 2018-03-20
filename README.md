@@ -173,5 +173,12 @@ $(function () {
 
 Report issues or feature requests to [GitHub Issues](https://github.com/brolycjw/datatable/issues).
 
+## To run tests
+```bash
+cd test/dummy
+yarn install or npm install
+bin/rails db:migrate:reset
+```
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
